@@ -19,9 +19,14 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField "String", "PICSUM_URL", '"https://picsum.photos"'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField "String", "PICSUM_URL", '"https://picsum.photos"'
         }
     }
     compileOptions {
