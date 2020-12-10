@@ -1,4 +1,4 @@
-package com.example.load_view.data
+package com.example.load_view.data.model
 
 import com.google.gson.annotations.SerializedName
 

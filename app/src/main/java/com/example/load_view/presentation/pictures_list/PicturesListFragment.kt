@@ -1,21 +1,24 @@
-package com.example.load_view.presentation.images_list
+package com.example.load_view.presentation.pictures_list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.load_view.R
-import kotlinx.android.synthetic.main.fragment_images_list.*
+import com.example.load_view.presentation.model.Picture
+import kotlinx.android.synthetic.main.fragment_pictures_list.*
 
-class ImagesListFragment : Fragment() {
+class PicturesListFragment : Fragment() {
 
     private val viewModel by lazy {
-        ViewModelProvider(this).get(ImagesListViewModel::class.java)
+        ViewModelProvider(this).get(PicturesListViewModel::class.java)
     }
+    private lateinit var mAdapter: PicturesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +30,7 @@ class ImagesListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_images_list, container, false)
+        return inflater.inflate(R.layout.fragment_pictures_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,19 +40,33 @@ class ImagesListFragment : Fragment() {
 
     private fun init() {
 
+        mAdapter = PicturesAdapter(clickEventByItem())
+        rv_images.apply {
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            adapter = mAdapter
+        }
+
         viewModel.apply {
 
             loading.observe(viewLifecycleOwner) { isShow ->
-                pb_images.visibility = if (isShow) View.VISIBLE else View.INVISIBLE
+                pb_images.visibility = if (isShow) View.VISIBLE else View.GONE
             }
 
             images.observe(viewLifecycleOwner) {
-                Log.d("9999", "init: IMAGES: ${it[1].url}")
+                mAdapter.submitList(it)
             }
 
             error.observe(viewLifecycleOwner) { message ->
                 Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun clickEventByItem(): (Picture) -> Unit {
+        return { p ->
+            findNavController().navigate(
+                PicturesListFragmentDirections.actionPicturesListFragmentToPictureFragment(p)
+            )
         }
     }
 }

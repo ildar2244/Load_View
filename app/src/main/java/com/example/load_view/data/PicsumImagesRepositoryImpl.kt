@@ -1,8 +1,9 @@
 package com.example.load_view.data
 
 import com.example.load_view.core.Response
+import com.example.load_view.data.model.PicsumResponse
 import com.example.load_view.domain.IPicsumImagesRepository
-import com.example.load_view.domain.Image
+import com.example.load_view.domain.model.Image
 
 class PicsumImagesRepositoryImpl(
     private val api: Api
