@@ -16,11 +16,14 @@ import java.io.IOException
 import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
+import javax.inject.Inject
 
-class PicturesListViewModel : ViewModel(), LifecycleObserver {
+class PicturesListViewModel @Inject constructor(
+    private val useCase: ImagesListUseCase
+) : ViewModel(), LifecycleObserver {
 
-    private val repo = PicsumImagesRepositoryImpl(ApiClient().makeService())
-    private val useCase = ImagesListUseCase(repo)
+    //private val repo = PicsumImagesRepositoryImpl(ApiClient().makeService())
+    //private val useCase = ImagesListUseCase(repo)
     private val _loading = MutableLiveData<Boolean>()
     private val _images = MutableLiveData<List<Picture>>()
     private val _error = MutableLiveData<String>()

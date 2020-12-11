@@ -11,10 +11,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        /*supportFragmentManager.beginTransaction()
-            .replace(R.id.container_main, PicturesListFragment(), PicturesListFragment::class.java.name)
-            .commit()*/
-
         findNavController(R.id.nav_host_fragment)
     }
 }

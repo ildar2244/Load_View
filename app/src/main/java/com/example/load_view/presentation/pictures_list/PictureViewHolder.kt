@@ -32,7 +32,7 @@ class PictureViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         with(itemView) {
 
             CoroutineScope(Dispatchers.Main).launch {
-                val uri = "https://picsum.photos/${picture.id}/100"
+                val uri = "https://picsum.photos/id/${picture.id}/100"
                 val bitmap = downloadImage(uri)
                 iv_item_picture.setImageBitmap(bitmap)
             }

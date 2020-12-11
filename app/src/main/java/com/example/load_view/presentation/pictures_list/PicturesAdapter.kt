@@ -3,9 +3,10 @@ package com.example.load_view.presentation.pictures_list
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.load_view.presentation.model.Picture
+import javax.inject.Inject
 
 
-class PicturesAdapter(
+class PicturesAdapter (
     val listener: (Picture) -> Unit
 ) : ListAdapter<Picture, PictureViewHolder>(PictureDiffCallback()) {
 

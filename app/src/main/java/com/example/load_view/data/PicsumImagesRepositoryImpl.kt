@@ -4,8 +4,9 @@ import com.example.load_view.core.Response
 import com.example.load_view.data.model.PicsumResponse
 import com.example.load_view.domain.IPicsumImagesRepository
 import com.example.load_view.domain.model.Image
+import javax.inject.Inject
 
-class PicsumImagesRepositoryImpl(
+class PicsumImagesRepositoryImpl @Inject constructor(
     private val api: Api
 ) : IPicsumImagesRepository {
 
